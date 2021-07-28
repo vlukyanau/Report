@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ReportClients.Api.Model
+﻿namespace ReportClients.Api.Model
 {
     public class ClientModel
     {

@@ -7,12 +7,12 @@ namespace ReportClients.DAL.Interfaces
         public interface IGenericAsyncRepository<T>
             where T : BaseEntity
         {
-            Task<T> GetById(int id);
+            Task<T> GetByIdAsync(int id);
 
-            Task<bool> Create(T entity);
+            Task CreateAsync(T entity);
             Task Update(T entity);
-            Task Delete(T entity);
+            Task Delete(int id);
 
-            Task<IEnumerable<T>> GetAll();
+            Task<IEnumerable<T>> GetAllAsync();
         }
 }

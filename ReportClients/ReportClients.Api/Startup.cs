@@ -1,25 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ReportClients.BLL.Configuration;
-using ReportClients.BLL.Interfaces;
 using ReportClients.DAL.Configuration;
-using ReportClients.DAL.Context;
-using ReportClients.DAL.Entities;
-using ReportClients.DAL.Interfaces;
 
 namespace ReportClients.Api
 {

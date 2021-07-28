@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ReportClients.BLL.DTO;
 using ReportClients.BLL.Interfaces;
@@ -18,14 +17,19 @@ namespace ReportClients.BLL.Services
             _client = client;
         }
 
-        public async Task<IEnumerable<ClientEntity>> GetAllClients()
+        public async Task<IEnumerable<ClientEntity>> GetAllClientsAsync()
         {
-            return await _client.GetAll();
+            return await _client.GetAllAsync();
         }
 
-        public async Task<ClientDto> GetClient(int id)
+        public async Task<ClientDto> GetClientAsync(int id)
         {
-            var result =  await _client.GetById(id);
+            var result =  await _client.GetByIdAsync(id);
+            if (result == null)
+            {
+                throw new InvalidOperationException("Client not found");
+            }
+
             return new ClientDto()
             {
                 ClientCode = result.ClientCode,
@@ -34,14 +38,29 @@ namespace ReportClients.BLL.Services
             };
         }
 
-        public async Task<bool> Create(ClientDto client)
+        public async Task CreateAsync(ClientDto client)
         {
-            return await _client.Create(new ClientEntity()
+            await _client.CreateAsync(new ClientEntity()
             {
                 Id = client.Id,
-                ClientName = client.ClientName,
-                ClientCode = client.ClientCode
+                ClientCode = client.ClientCode,
+                ClientName = client.ClientName
             });
+        }
+
+        public Task Update(ClientDto client)
+        {
+            return _client.Update(new ClientEntity()
+            {
+                ClientName = client.ClientName,
+                ClientCode = client.ClientCode,
+                Id = client.Id
+            });
+        }
+
+        public Task Delete(int id)
+        {
+            return _client.Delete(id);
         }
     }
 }
