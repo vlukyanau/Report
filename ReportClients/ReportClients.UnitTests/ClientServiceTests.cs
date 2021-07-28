@@ -27,7 +27,7 @@ namespace ReportClients.UnitTests
             // Act
 
             //Assert
-            Assert.Throws<InvalidOperationException>(() => _clientServiceMock.CreateClient(null));
+            Assert.ThrowsAsync<InvalidOperationException>(() => _clientServiceMock.CreateAsync(null));
         }
     }
 }

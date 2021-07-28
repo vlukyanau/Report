@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ReportClients.DAL.Context;
@@ -18,32 +17,33 @@ namespace ReportClients.DAL.Repositories
             _context = context;
         }
 
-        public async Task<bool> Create(T entity)
+        public async Task CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
-            return true;
         }
 
-        public Task Delete(T entity)
+        public Task Delete(int id)
         {
+            var entity = _context.Set<T>().Find(id);
             _context.Set<T>().Remove(entity);
             return _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
         public Task Update(T entity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
+            _context.Entry(entity).CurrentValues.SetValues(entity);
+            //_context.Entry(entity).State = EntityState.Modified;
             return _context.SaveChangesAsync();
         }
     }

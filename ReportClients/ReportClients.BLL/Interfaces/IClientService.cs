@@ -7,8 +7,11 @@ namespace ReportClients.BLL.Interfaces
 {
     public interface IClientService
     {
-        Task<IEnumerable<ClientEntity>> GetAllClients();
-        Task<ClientDto> GetClient(int id);
-        Task<bool> Create(ClientDto client);
+        Task<IEnumerable<ClientEntity>> GetAllClientsAsync();
+        Task<ClientDto> GetClientAsync(int id);
+        Task CreateAsync(ClientDto client);
+        Task Update(ClientDto client);
+
+        Task Delete(int id);
     }
 }
